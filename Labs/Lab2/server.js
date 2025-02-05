@@ -12,7 +12,10 @@ app.get("/", (req, res) => {
 
 //User Routes
 let userRoutes = require('./routes/userRoutes');
+let postRoutes = require('./routes/postRoutes');
+
 app.use('/api/users', userRoutes);
+app.use('/api/posts', postRoutes);
 
 // set port, listen for requests
 const PORT = process.env.PORT || 8080;

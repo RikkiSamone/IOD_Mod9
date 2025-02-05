@@ -12,4 +12,14 @@ router.post('/create', (req, res) => {
     Controllers.userController.createUser(req.body, res);
 })
 
+//Update Users
+router.put('/:id', (req, res) => {
+Controllers.userController.updateUser(req, res)
+})
+
+//Deletes User
+router.delete('/:id', (req, res) => {
+Controllers.userController.deleteUser(req, res)
+})
+
 module.exports = router;
