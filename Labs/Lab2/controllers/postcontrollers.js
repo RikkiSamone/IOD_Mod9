@@ -15,10 +15,11 @@ exports.createPost = async (req, res) => {
 
     // Create new post
     const newPost = new Post({
-      title,
-      content,
-      author: userId,
-    });
+      title: req.body.title,
+      content: req.body.content,
+      author: userId
+      });
+      
 const savedPost = await newPost.save();
 
     // Add post reference to the user
@@ -58,6 +59,47 @@ exports.deletePost = async (req, res) => {
     res.status(200).json({ message: "Post deleted successfully" });
   } catch (err) {
     res.status(500).json({ error: err.message });
+  }
+};
+
+// Like a Post
+exports.likePost = async (req, res) => {
+  try {
+    const post = await Post.findById(req.params.postId);
+
+    // Check if user already liked the post
+    if (post.likes.includes(req.body.userId)) {
+      return res.status(400).json({ message: "You already liked this post." });
+    }
+
+    // Add the user to the likes array
+    post.likes.push(req.body.userId);
+    await post.save();
+
+    res.status(200).json({ message: "Post liked!", post });
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+};
+
+// Add a Comment
+exports.addComment = async (req, res) => {
+  try {
+    const post = await Post.findById(req.params.postId);
+
+    // Create a new comment object
+    const newComment = {
+      content: req.body.content,
+      author: req.body.userId,
+    };
+
+    // Add the new comment to the comments array
+    post.comments.push(newComment);
+    await post.save();
+
+    res.status(201).json({ message: "Comment added!", post });
+  } catch (error) {
+    res.status(500).json({ message: error.message });
   }
 };
 

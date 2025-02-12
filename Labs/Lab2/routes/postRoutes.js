@@ -19,4 +19,10 @@ router.delete('/:id', (req, res) => {
 Controllers.postController.deletePost(req, res)
 })
 
+//Like Post
+router.post('/:postId/like', postController.likePost);
+
+//Comment on a Post
+router.post('/:postId/comment', postController.addComment);
+
 module.exports = router;
