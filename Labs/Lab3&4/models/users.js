@@ -1,7 +1,11 @@
-const { DataTypes } = require('sequelize');
+const { DataTypes, Model } = require("sequelize");
+let dbConnect = require("../dbConnect");
 const sequelize = require('../config/database');
 
-const User = sequelize.define('User', {
+const sequelizeInstance = dbConnect.Sequelize; 
+class User extends Model { }
+
+User.init({
   username: {
     type: DataTypes.STRING(100),
     allowNull: false,

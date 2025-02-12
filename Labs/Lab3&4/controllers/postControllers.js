@@ -1,7 +1,7 @@
-const Post = require('../models/post');
-const User = require('../models/user');
-const Comment = require('../models/comment');
-const Like = require('../models/like');
+const Post = require('../models/posts');
+const User = require('../models/users');
+const Comment = require('../models/comments');
+const Like = require('../models/likes');
 
 // Create a new post
 exports.createPost = async (req, res) => {
